@@ -46,42 +46,59 @@ class Motorcycles extends CI_Controller{
     }
 
 
-	public function edit($mc_id=""){
-		if($mc_id){
-			$data["title"] = "Edit Motorcycle Record";
-			$this->load->model("Motorcycles_model");
-			$data["motorcycles"] = $this->Motorcycles_model->get_motorcycles($mc_id);
-
-			$this->load->view("pages/motorcycle_edit", $data); 
-		} else{
-			redirect("/CI3/Motorcycles");
-		}
-	}
-
+	public function edit($mc_id = ""){
+        if ($mc_id){
+            $data["title"] = "Edit Motorcycle Record";
+            $this->load->model("Motorcycles_model");
+            $data["motorcycles"] = $this->Motorcycles_model->get_motorcycles($mc_id);
+            $this->load->view("pages/motorcycle_edit", $data);
+        } else {
+            redirect("/CI3/motorcycles");
+        }
+    }
 	public function verifyEdit($mc_id = ""){
-		$this->form_validation->set_rules("brand","Brand", "required|callback_brand_check");
-		$this->form_validation->set_rules("model","Model", "required");
-		$this->form_validation->set_rules("displacement","Displacement","required");
+        $this->form_validation->set_rules("brand", "Brand", "required|callback_brand_check");
+        $this->form_validation->set_rules("model", "Model", "required");
+        $this->form_validation->set_rules("displacement", "Displacement", "required");
 
-		if($this->form_validation->run() == true){
-			$data = array(
-				"mc_brand" => $this->input->post("brand"),
-				"mc_model" => $this->input->post("model"),
-				"mc_displacement" => $this->input->post("displacement")
+        if ($this->form_validation->run() == true){
+            $data = array(
+                "mc_brand" => $this->input->post("brand"),
+                "mc_model" => $this->input->post("model"),
+                "mc_displacement" => $this->input->post("displacement")
+            );
 
-			);
+            $this->load->model("Motorcycles_model");
+            $isUpdated = $this->Motorcycles_model->edit($mc_id, $data);
 
-			$this->load->model("Motorcycles_model");
-			$isUpdated = $this->Motorcycles_model->edit($mc_id, $data); 
-		
-			if($isUpdated){
-				echo "Success!";
-			} else{
-				echo "Oops! Something went wrong.";
-			}
-		}
-		else {
-			$this->edit($mc_id);
-		}
-	}
+            if ($isUpdated){
+                echo "Success!";
+            } else {
+                echo "Oops! Something went wrong.";
+            }
+        }
+        else {
+            $this->edit($mc_id);
+        }
+    }
+    
+
+
+	public function delete($mc_id = ""){
+        $this->load->model("Motorcycles_model");
+        $data["mc"] = $this->Motorcycles_model->get_motorcycles($mc_id);
+
+        if ($data["mc"]){
+            $isDeleted = $this->Motorcycles_model->delete($mc_id);
+
+            if ($isDeleted){
+                echo "Success!";
+            } else {
+                echo "Oops! Something went wrong.";
+            }
+        }
+        else {
+            redirect("/CI3/motorcycles");
+        }
+    }
 }

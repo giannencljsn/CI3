@@ -23,8 +23,8 @@
                 <td><?php echo $motorcycle["mc_model"]; ?></td>
                 <td><?php echo $motorcycle["mc_displacement"]; ?></td>
 				<td>
-					<a href="<?php echo('/CI3/motorcycles/edit/'. $motorcycle['mc_id']); ?>">Edit</a>
-					<a href="<?php echo('/CI3/motorcyles/delete/'. $motorcycle['mc_id']); ?>">Delete</a>
+					<a href="<?php echo('/CI3/Motorcycles/edit/'. $motorcycle['mc_id']); ?>">Edit</a>
+					<a href="<?php echo('/CI3/Motorcycles/delete/'. $motorcycle['mc_id']); ?>">Delete</a>
 
 				</td>
             </tr>

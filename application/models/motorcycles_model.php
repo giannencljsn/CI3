@@ -17,10 +17,14 @@ class Motorcycles_model extends CI_Model{
         return $this->db->insert("motorcycles", $data);
     }
 
-	public function edit($id, $data){
-		$this->db->where(array("mc_id" => $id));
+	public function edit($mc_id, $data){
+		$this->db->where(array("mc_id" => $mc_id));
 		return $this->db->update("motorcycles", $data);
 	}
+	public function delete($id){
+        $data = array("mc_id" => $id);
+        return $this->db->delete("motorcycles", $data);
+    }
 }
 
 ?>
