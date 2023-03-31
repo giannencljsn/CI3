@@ -7,7 +7,7 @@
     <h1><?php echo $title; ?></h1>
 
 		<?php echo validation_errors(); ?>
-			<form action="/CI3/Motorcycles/add" method="post">
+		<form action="<?php echo base_url('motorcycles/add'); ?>" method="post">
 				Brand: <input type="text" name="brand"><br/>
 				Model: <input type="text" name="model"><br/>
 				Displacement: <input type="number" name="displacement"><br/>
