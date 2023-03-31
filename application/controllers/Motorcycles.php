@@ -27,7 +27,7 @@ class Motorcycles extends CI_Controller{
             $isAdded = $this->Motorcycles_model->add($data);
 
             if ($isAdded){
-                echo "Success!";
+                redirect(base_url("motorcycles"));
             } else {
                 echo "Oops! Something went wrong.";
             }
@@ -53,7 +53,7 @@ class Motorcycles extends CI_Controller{
             $data["motorcycles"] = $this->Motorcycles_model->get_motorcycles($mc_id);
             $this->load->view("pages/motorcycle_edit", $data);
         } else {
-            redirect("/CI3/motorcycles");
+			redirect(base_url("motorcycles"));
         }
     }
 	public function verifyEdit($mc_id = ""){
@@ -72,7 +72,7 @@ class Motorcycles extends CI_Controller{
             $isUpdated = $this->Motorcycles_model->edit($mc_id, $data);
 
             if ($isUpdated){
-                echo "Success!";
+                redirect(base_url("motorcycles"));
             } else {
                 echo "Oops! Something went wrong.";
             }
@@ -92,13 +92,13 @@ class Motorcycles extends CI_Controller{
             $isDeleted = $this->Motorcycles_model->delete($mc_id);
 
             if ($isDeleted){
-                echo "Success!";
+                redirect(base_url("motorcycles"));
             } else {
                 echo "Oops! Something went wrong.";
             }
         }
         else {
-            redirect("/CI3/motorcycles");
+            redirect(base_url("motorcycles"));
         }
     }
 }
